@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<head jsf:id="head">
+	<title>rainyhills</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet>
+
+		html{height:100%;}
+		body {
+			background:#102B36;
+			background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(16,43,54,1) ), to(#000000)  );
+			background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(0,0,0,1) 100%);
+			overflow:hidden;
+		}
+
+
+		.drop {
+		  background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(16,43,54,1) ), to(rgba(255,255,255,0.6))  );
+		  background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.6) 100%);
+		  width:1px;
+		  height:89px;
+		  position: absolute;
+		  bottom:200px;
+		  -webkit-animation: fall .63s linear infinite;
+		  -moz-animation: fall .63s linear infinite;  
+		}
+
+		@-webkit-keyframes fall {
+			to {margin-top:900px;}
+		}
+
+		@-moz-keyframes fall {
+			to {margin-top:900px;}
+		}
+		
+	</h:outputStylesheet>
+
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+
+	<h:outputScript>
+		var nbDrop = 158; 
+
+		function randRange( minNum, maxNum) {
+		  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+		}
+
+		function createRain() {
+
+			for( i=1; i &lt; nbDrop; i++) {
+				var dropLeft = randRange(0,1600);
+				var dropTop = randRange(-1000,1400);
+				$('.rain').append('<div class="drop" id="drop'+i+'"></div>');
+				$('#drop'+i).css('left',dropLeft);
+				$('#drop'+i).css('top',dropTop);
+	  		}
+		}
+	  createRain();			  
+   </h:outputScript>
+</head>
+
+<body jsf:id="body" onload="createRain();">
+
+	<section class="rain"></section>
+
+	<div id="container">
+		<div id="content">
+			<ui:insert name="content">
+                    [Template content will be inserted here]
+         </ui:insert>
+		</div>
+		<div id="aside" style="color: #FEEEEE;">
+			<p>Javadoc</p>
+			<ul>
+				<li>
+					<a href="${pageContext.request.contextPath}/rainyhills-web/javadoc.html">Getting Started Developing Applications Guide</a>
+				</li>
+			</ul>
+		</div>
+		<div id="footer" style="color: #FEEEEE;">
+			<p>
+				This project was generated for a CRX test.<br />
+			</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+br.com.rainyhills.model.dto
+br.com.rainyhills.model.service
+com.crx.rainyhills.controller
+com.crx.rainyhills.entity
+com.crx.rainyhills.repository
+com.crx.rainyhills.rest
+com.crx.rainyhills.service
+com.crx.rainyhills.test
+com.crx.rainyhills.util

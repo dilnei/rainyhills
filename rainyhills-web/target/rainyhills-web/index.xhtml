@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+      <h:panelGrid columns="2">
+      <h:panelGrid columns="1">
+      <h1 style="color: #FEEEEE; font-size: 38px;">Rain Hills</h1>
+
+      <div>      
+         <p style="color: #FEEEEE; font-size: 22px;">It calculates the volume of water which remained after the rain.</p>
+         <p style="color: #FEEEEE; font-size: 18px;">Enter the numbers relating to surface..</p>
+      </div>
+
+      <h:form id="reg">
+         <p style="color: #FEEEEE;">Imagine that the array describes profile of a surface, for example: 32412</p>
+         
+         <h:panelGrid columns="4">
+            <h:outputLabel for="value" value="Values (surface):" style="color: #FEEEEE; margin-left: -4px;"/>
+            <h:inputText id="value" value="#{surface.values}" />
+<!--              <h:message for="value" errorClass="invalid"/> -->
+            <h:panelGrid columns="2">
+               <h:commandButton id="calculates" action="#{surfaceController.register}" value="Calculates" />
+               <h:messages errorClass="invalid" infoClass="valid" warnClass="warning" globalOnly="true"  style="color: #FEEEEE;"/>
+            </h:panelGrid>
+         </h:panelGrid>
+
+      </h:form>
+      </h:panelGrid>
+
+      <h:panelGrid columns="1" style="margin-left: 50px;">
+      <h1 style="color: #FEEEEE; font-size: 38px;">Surfaces</h1>
+      <h:panelGroup rendered="#{empty surfaces}">
+         <em style="color: #FEEEEE;">No registered surfaces.</em>
+      </h:panelGroup>
+      <h:dataTable var="_surface" value="#{surfaces}" rendered="#{not empty surfaces}" styleClass="simpletablestyle"  style="color: #FEEEEE;">
+         <h:column>
+            <f:facet name="header">Id</f:facet>
+                <span style="color: #FEEEEE;">#{_surface.id}</span> 
+            </h:column>
+         <h:column>
+            <f:facet name="header">Values</f:facet>
+                <span style="color: #FEEEEE;">#{_surface.values}</span>
+            </h:column>
+         <h:column>
+            <f:facet name="header">Volume</f:facet>
+                <span style="color: #FEEEEE;">#{_surface.volume}</span>
+            </h:column>
+         <h:column>
+            <f:facet name="header">REST URL</f:facet>
+            <a style="color: #FEEEEE;" href="#{request.contextPath}/rest/surfaces/#{_surface.id}">/rest/members/#{_surface.id}</a>
+         </h:column>
+         <f:facet name="footer">
+            REST URL for all executions: <a style="color: #FEEEEE;" href="#{request.contextPath}/rest/surfaces">/rest/surfaces</a>
+         </f:facet>
+      </h:dataTable>
+      </h:panelGrid>
+      </h:panelGrid>
+   </ui:define>
+</ui:composition>
